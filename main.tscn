@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://bge7ym7h5ltca"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_crr46"]
+[ext_resource type="Theme" uid="uid://bfrimati8mn60" path="res://menu_theme.tres" id="1_wcgga"]
+[ext_resource type="PackedScene" uid="uid://cguifc60lh353" path="res://game.tscn" id="2_6kj8l"]
+
+[node name="Main" type="CanvasLayer"]
+script = ExtResource("1_crr46")
+
+[node name="game" parent="." instance=ExtResource("2_6kj8l")]
+
+[node name="start_menu" type="Node2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="BtnStart" type="Button" parent="start_menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = 210.0
+offset_right = 140.0
+offset_bottom = 287.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_wcgga")
+text = "Start Game"
+
+[node name="Title" type="Label" parent="start_menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_top = -290.0
+offset_right = 151.0
+offset_bottom = -221.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_wcgga")
+theme_type_variation = &"HeaderLarge"
+text = "ROGUENOID"
+
+[node name="LevelSelector" type="OptionButton" parent="start_menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -38.5
+offset_right = 106.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+theme = ExtResource("1_wcgga")
+alignment = 1
+
+[connection signal="button_down" from="start_menu/BtnStart" to="." method="_on_btn_start_button_down"]
+[connection signal="pressed" from="start_menu/BtnStart" to="." method="_on_btn_start_pressed"]
