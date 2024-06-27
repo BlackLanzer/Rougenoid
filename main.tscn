@@ -62,5 +62,6 @@ size_flags_vertical = 4
 theme = ExtResource("1_wcgga")
 alignment = 1
 
+[connection signal="game_over" from="game" to="." method="_on_game_over"]
 [connection signal="button_down" from="start_menu/BtnStart" to="." method="_on_btn_start_button_down"]
 [connection signal="pressed" from="start_menu/BtnStart" to="." method="_on_btn_start_pressed"]

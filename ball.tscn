@@ -18,3 +18,7 @@ shape = SubResource("CircleShape2D_6o7o8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.26, 0.26)
 texture = ExtResource("1_ownlq")
+
+[node name="DirectionLine" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.773085, 0.289093, 0.356167, 1)

@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct6uney4wetnt"]
+[gd_scene load_steps=6 format=3 uid="uid://ct6uney4wetnt"]
 
 [ext_resource type="PackedScene" uid="uid://dcjfpw4611c7y" path="res://block.tscn" id="1_hbyf8"]
-[ext_resource type="PackedScene" uid="uid://cwa2f4773ptjc" path="res://player.tscn" id="2_ivolo"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_72nf8"]
 
@@ -18,8 +17,8 @@ normal = Vector2(-1, 0)
 [node name="Level1" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1279.0
-offset_bottom = 721.0
+offset_right = 1280.0
+offset_bottom = 720.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
@@ -564,9 +563,6 @@ position = Vector2(1155, 262)
 
 [node name="RigidBody2D180" parent="Level" instance=ExtResource("1_hbyf8")]
 position = Vector2(1155, 286)
-
-[node name="Player" parent="." instance=ExtResource("2_ivolo")]
-position = Vector2(612, 633)
 
 [node name="DeadZone" type="Area2D" parent="." groups=["dead_zone"]]
 collision_mask = 15
