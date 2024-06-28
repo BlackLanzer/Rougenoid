@@ -40,6 +40,11 @@ func _process(delta: float) -> void:
 			if (_ball_timer == 0&&_lives > 0):
 				_init_ball()
 
+func _input(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion):
+		if (_player_ball != null&&_player_ball.state == BallState.WITH_PLAYER):
+			_player_ball.direction = (event.position - _player_ball.position).normalized()
+
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):

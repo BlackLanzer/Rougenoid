@@ -11,7 +11,6 @@ var player: CharacterBody2D
 
 func _ready() -> void:
 	direction = start_direction.normalized()
-	velocity = direction * speed
 
 func _process(delta: float) -> void:
 	$DirectionLine.clear_points()
@@ -23,6 +22,7 @@ func _physics_process(delta: float) -> void:
 	match state:
 		BallState.WITH_PLAYER:
 			position = player.position + Vector2(8, -16)
+			velocity = direction * speed
 		BallState.MOVING:
 			var collision = move_and_collide(velocity * delta)
 			
