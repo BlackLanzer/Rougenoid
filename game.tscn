@@ -17,11 +17,25 @@ metadata/_edit_lock_ = true
 layer = 128
 
 [node name="GameInfo" type="HBoxContainer" parent="UI"]
-offset_left = 1176.0
-offset_top = 680.0
-offset_right = 1260.0
-offset_bottom = 720.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
 alignment = 2
+
+[node name="Label4" type="Label" parent="UI/GameInfo"]
+layout_mode = 2
+text = "B:
+"
+
+[node name="LblBallTimer" type="Label" parent="UI/GameInfo"]
+layout_mode = 2
+text = "00:00"
 
 [node name="Label" type="Label" parent="UI/GameInfo"]
 layout_mode = 2
@@ -42,3 +56,7 @@ text = "3"
 [node name="Player" parent="." instance=ExtResource("2_bncvu")]
 z_index = 1000
 position = Vector2(612, 633)
+
+[node name="DirectionLine" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.773085, 0.289093, 0.356167, 1)

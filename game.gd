@@ -8,15 +8,19 @@ const LEVELS = [
 	"level_2",
 	"level_3"
 ]
+const BALL_SPAWN_TIME = 10
 
 var _ball_res = preload ("res://entities/ball.tscn")
 var _balls = Array()
+var _player_ball
 var _deadzone
 var _level_node
 var _lives = 3
-var _game_clock = 0
+var _game_clock = 0.0
 var _game_state = GameState.MENU
 var _current_level = -1
+# Time until spawn of next ball
+var _ball_timer = 0.0
 
 signal game_over
 
@@ -30,6 +34,11 @@ func _process(delta: float) -> void:
 		_game_clock += delta
 		$UI/GameInfo/LblTimer.text = "%02d:%02d" % [floori(_game_clock / 60), int(_game_clock) % 60]
 		$UI/GameInfo/LblLives.text = str(_lives)
+		$UI/GameInfo/LblBallTimer.text = "%02d:%02d" % [floori(_ball_timer / 60), int(_ball_timer) % 60]
+		if (_player_ball.state != BallState.WITH_PLAYER):
+			_ball_timer = max(_ball_timer - delta, 0)
+			if (_ball_timer == 0&&_lives > 0):
+				_init_ball()
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.ZERO
@@ -38,9 +47,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("ui_left"):
 		direction.x = -PLAYER_VELOCITY
 	if (Input.is_action_pressed("release_ball")):
-		for ball in _balls:
-			ball.state = BallState.MOVING
-			ball.reparent(self)
+			_player_ball.state = BallState.MOVING
+			_player_ball.reparent(self)
 
 	if direction != Vector2.ZERO:
 		$Player.move_and_collide($Player.velocity.move_toward(direction, PLAYER_ACCELERATION * delta))
@@ -51,13 +59,16 @@ func _physics_process(delta: float) -> void:
 		_on_level_complete()
 
 func _init_ball() -> void:
-	var ball_node = _ball_res.instantiate()
-	ball_node.state = BallState.WITH_PLAYER
-	ball_node.speed = BALL_SPEED
-	ball_node.player = $Player
-	add_child(ball_node)
-	_balls.append(ball_node)
-	_lives -= 1
+	if (_lives > 0):
+		var ball_node = _ball_res.instantiate()
+		ball_node.state = BallState.WITH_PLAYER
+		ball_node.speed = BALL_SPEED
+		ball_node.player = $Player
+		add_child(ball_node)
+		_balls.append(ball_node)
+		_lives -= 1
+		_player_ball = ball_node
+		_ball_timer = BALL_SPAWN_TIME
 
 func _on_ball_dead(ball) -> void:
 	_balls.erase(ball)
